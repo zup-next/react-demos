@@ -25,6 +25,7 @@
     "@babel/plugin-transform-runtime": "^7.4.3",
     "@babel/preset-env": "^7.4.3",
     "@babel/preset-typescript": "^7.3.3",
+    "@hapi/joi": "^15.0.0",
     "@types/lodash": "^4.14.123",
     "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "^10.0.1",
@@ -37,6 +38,7 @@
     "eslint-plugin-import": "^2.16.0",
     "eslint-plugin-jsx-a11y": "^6.2.1",
     "eslint-plugin-react": "^7.12.4",
+    "hapi": "^18.1.0",
     "jest": "^24.7.0",
     "nodemon": "^1.18.10",
     "typescript": "^3.4.5"

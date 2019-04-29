@@ -1,1 +1,1 @@
-# redux-resource
+# README
