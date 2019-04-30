@@ -129,7 +129,7 @@ const catalog = [
 export const getProfile = () => profile
 export const updateProfile = updated => profile = { ...profile, ...updated }
 
-export const getWallet = () => profile
+export const getWallet = () => wallet
 export const updateWallet = updated => wallet = { ...wallet, ...updated }
 
 export const getCatalog = () => catalog

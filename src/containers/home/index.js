@@ -1,7 +1,9 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import resources from '../../store/resources'
-import { isLoading, hasLoadError } from '@zup-it/redux-resource'
+import { isPristine, isLoading, hasLoadError } from '@zup-it/redux-resource'
+import Movie from './Movie'
+import { Content, List, PageTitle } from './styled'
 import { map } from 'lodash'
 
 class Home extends PureComponent {
@@ -11,13 +13,27 @@ class Home extends PureComponent {
     loadCatalog()
   }
 
+  renderLoading = () => <Content>Loading...</Content>
+
+  renderError = () => <Content>Error!</Content>
+
+  renderContent = movies => (
+    <Content>
+      <PageTitle>Catálogo</PageTitle>
+      <List>
+        {map(movies, movie => <Movie key={movie.id} {...movie} />)}
+      </List>
+    </Content>
+  )
+
   render() {
     const { catalog } = this.props
-    if (isLoading(catalog)) return <p>Loading...</p>
-    if (hasLoadError(catalog)) return <p>Error!</p>
-    if (catalog.data === null) return null
 
-    return map(catalog.data, movie => <p key={movie.id}>{movie.title}</p>)
+    if (isPristine(catalog)) return null
+    if (isLoading(catalog)) return this.renderLoading()
+    if (hasLoadError(catalog)) return this.renderError()
+
+    return this.renderContent(catalog.data)
   }
 
 }

@@ -7,7 +7,7 @@ import Payment from '../containers/payment'
 export default () => (
   <Switch>
     <Route exact path="/" component={Home} />
-    <Route path="/about" component={Movie} />
-    <Route path="/contact" component={Payment} />
+    <Route path="/movie/:id" component={Movie} />
+    <Route path="/payment" component={Payment} />
   </Switch>
 )

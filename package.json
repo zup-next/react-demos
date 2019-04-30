@@ -7,14 +7,14 @@
   "license": "MIT",
   "scripts": {
     "start": "webpack-dev-server --hot",
-    "start:stub": "yarn start && yarn stub",
+    "start:mock": "yarn start & yarn stub",
     "test": "jest",
     "eslint": "eslint src --quiet",
     "stub": "nodemon stub --exec babel-node --presets=@babel/preset-env"
   },
   "dependencies": {
     "@babel/runtime": "^7.4.3",
-    "@zup-it/redux-resource": "git+ssh://git@github.com:Tiagoperes/redux-resource.git#3a64ae737773fd84467fcf2d215912c6f8c9d897",
+    "@zup-it/redux-resource": "git+ssh://git@github.com:Tiagoperes/redux-resource.git#031da7ff8e25623ff7e509146ddb5387fe548ea9",
     "axios": "^0.18.0",
     "lodash": "^4.17.11",
     "react": "^16.6.3",
@@ -23,7 +23,8 @@
     "react-redux": "^5.1.1",
     "react-router-dom": "^5.0.0",
     "redux": "^4.0.1",
-    "redux-saga": "^1.0.2"
+    "redux-saga": "^1.0.2",
+    "styled-components": "^4.2.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.4.3",
