@@ -36,6 +36,7 @@ module.exports = {
     "react/react-in-jsx-scope": "off",
     "implicit-arrow-linebreak": "off",
     "import/prefer-default-export": "off",
-    "no-return-assign": "off"
+    "no-return-assign": "off",
+    "react/prop-types": "off",
   }
 }
