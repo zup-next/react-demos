@@ -15,7 +15,7 @@ const loadWallet = () => api.request('/wallet', { method: 'GET' })
 
 const loadCatalog = () => api.request('/catalog', { method: 'GET' })
 
-const createOrder = data => api.request('/profile', { method: 'POST', data })
+const createOrder = data => api.request('/order', { method: 'POST', data })
 
 export default {
   loadProfile,

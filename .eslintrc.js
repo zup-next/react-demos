@@ -38,5 +38,6 @@ module.exports = {
     "import/prefer-default-export": "off",
     "no-return-assign": "off",
     "react/prop-types": "off",
+    "radix": "off",
   }
 }

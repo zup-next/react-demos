@@ -3,7 +3,9 @@ import { connect } from 'react-redux'
 import resources from '../../store/resources'
 import { isPristine, isLoading, hasLoadError } from '@zup-it/redux-resource'
 import { find } from 'lodash'
-import { Content, Poster, MovieData, Title, Description, BuyButton } from './styled'
+import { Link } from 'react-router-dom'
+import { Poster, MovieData, Description } from './styled'
+import { Content, PageTitle, Button } from '../../components/commons.styled'
 
 class Home extends PureComponent {
 
@@ -20,26 +22,31 @@ class Home extends PureComponent {
     <Content>
       <Poster src={movie.poster} />
       <MovieData>
-        <Title>{movie.title} ({movie.year})</Title>
+        <PageTitle>{movie.title} ({movie.year})</PageTitle>
         <Description>{movie.description}</Description>
-        <BuyButton>Buy for ${movie.price}</BuyButton>
+        <Link to={`/payment/${movie.id}`}>
+          <Button>Buy for ${movie.price}</Button>
+        </Link>
       </MovieData>
     </Content>
   )
 
   render() {
-    const { catalog, match: { params: { id } } } = this.props
+    const { movie } = this.props
 
-    if (isPristine(catalog)) return null
-    if (isLoading(catalog)) return this.renderLoading()
-    if (hasLoadError(catalog)) return this.renderError()
+    if (isPristine(movie)) return null
+    if (isLoading(movie)) return this.renderLoading()
+    if (hasLoadError(movie)) return this.renderError()
 
-    return this.renderContent(find(catalog.data, { id: parseInt(id, 10) }))
+    return this.renderContent(movie.data)
   }
 
 }
 
-const mapStateToProps = ({ catalog }) => ({ catalog })
+const mapStateToProps = ({ catalog }, { match: { params: { id } } }) => ({
+  movie: { ...catalog, data: find(catalog.data, { id: parseInt(id) }) },
+})
+
 const actions = { loadCatalog: resources.catalog.actions.load }
 
 export default connect(mapStateToProps, actions)(Home)

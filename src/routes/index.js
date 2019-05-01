@@ -8,6 +8,6 @@ export default () => (
   <Switch>
     <Route exact path="/" component={Home} />
     <Route path="/movie/:id" component={Movie} />
-    <Route path="/payment" component={Payment} />
+    <Route path="/payment/:id" component={Payment} />
   </Switch>
 )

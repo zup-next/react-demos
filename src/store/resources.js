@@ -1,4 +1,5 @@
 import createResource from '@zup-it/redux-resource'
+import { put } from 'redux-saga/effects'
 import api from '../api'
 
 const profile = createResource('PROFILE', {
@@ -8,9 +9,13 @@ const profile = createResource('PROFILE', {
 
 const catalog = createResource('CATALOG', { load: api.loadCatalog })
 
-const order = createResource('ORDER', { create: api.createOrder })
-
 const wallet = createResource('WALLET', { load: api.loadWallet })
+
+function* onOrderSuccess() {
+  yield put(wallet.actions.load())
+}
+
+const order = createResource('ORDER', { create: api.createOrder }, { create: onOrderSuccess })
 
 export default {
   profile,

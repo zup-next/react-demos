@@ -3,7 +3,8 @@ import { connect } from 'react-redux'
 import resources from '../../store/resources'
 import { isPristine, isLoading, hasLoadError } from '@zup-it/redux-resource'
 import Movie from './Movie'
-import { Content, List, PageTitle } from './styled'
+import { List } from './styled'
+import { Content, PageTitle, Center } from '../../components/commons.styled'
 import { map } from 'lodash'
 
 class Home extends PureComponent {
@@ -19,7 +20,7 @@ class Home extends PureComponent {
 
   renderContent = movies => (
     <Content>
-      <PageTitle>Catálogo</PageTitle>
+      <Center><PageTitle>Catalog</PageTitle></Center>
       <List>
         {map(movies, movie => <Movie key={movie.id} {...movie} />)}
       </List>

@@ -1,12 +1,9 @@
 import styled from 'styled-components'
 
-export const Content = styled.div`
-  padding: 30px;
-`
 export const List = styled.ul`
   list-style: none;
   padding: 0;
-  margin: 0;
+  margin: 30px 0 0 0;
 
   a {
     color: #FFF;
@@ -27,8 +24,4 @@ export const Title = styled.p`
 
 export const Price = styled.p`
   font-size: 13px;
-`
-
-export const PageTitle = styled.h2`
-  text-align: center;
 `
