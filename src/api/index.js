@@ -7,15 +7,15 @@ const api = axios.create({
 
 api.interceptors.response.use(response => response.data)
 
-const loadProfile = () => api.request('/profile', { method: 'GET' })
+const loadProfile = () => api.get('/profile')
 
-const saveProfile = data => api.request('/profile', { method: 'PUT', data })
+const saveProfile = data => api.put('/profile', data)
 
-const loadWallet = () => api.request('/wallet', { method: 'GET' })
+const loadWallet = () => api.get('/wallet')
 
-const loadCatalog = () => api.request('/catalog', { method: 'GET' })
+const loadCatalog = () => api.get('/catalog')
 
-const createOrder = data => api.request('/order', { method: 'POST', data })
+const createOrder = data => api.post('/order', data)
 
 export default {
   loadProfile,
