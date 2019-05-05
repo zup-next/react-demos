@@ -389,7 +389,7 @@ import {
 
 class Home extends PureComponent {
 
-  state = { selectedPaymentMethod: 'balance' }
+  state = { selectedPaymentMethod: { type: 'balance' } }
 
   componentDidMount() {
     const { loadCatalog, loadWallet } = this.props
@@ -402,11 +402,8 @@ class Home extends PureComponent {
   placeOrder = () => {
     const { createOrder, movie } = this.props
     const { selectedPaymentMethod } = this.state
-    const payment = selectedPaymentMethod === 'balance'
-      ? { type: 'balance' }
-      : { type: 'card', id: selectedPaymentMethod }
 
-    createOrder({ productId: movie.data.id, payment })
+    createOrder({ productId: movie.data.id, payment: selectedPaymentMethod })
   }
 
   renderLoading = () => <Content>Loading...</Content>
@@ -440,16 +437,16 @@ class Home extends PureComponent {
         <PaymentMethod
           label="Balance"
           value={`$${wallet.balance}`}
-          selected={selected === 'balance'}
-          onClick={() => this.selectPaymentMethod('balance')}
+          selected={selected.type === 'balance'}
+          onClick={() => this.selectPaymentMethod({ type: 'balance' })}
         />
         {map(wallet.cards, card => (
           <PaymentMethod
             key={card.id}
             label={card.brand}
             value={`**** **** **** ${card.number}`}
-            selected={selected === card.id}
-            onClick={() => this.selectPaymentMethod(card.id)}
+            selected={selected.id === card.id}
+            onClick={() => this.selectPaymentMethod({ type: 'card', id: card.id })}
           />
         ))}
       </PaymentMethodList>

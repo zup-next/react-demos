@@ -1,5 +1,5 @@
 Arguments: 
-  /usr/bin/node /usr/share/yarn/bin/yarn.js
+  /usr/bin/node /usr/share/yarn/bin/yarn.js add @zup-next/redux-action-cache
 
 PATH: 
   /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/mnt/c/Program Files/cmder/vendor/conemu-maximus5/ConEmu/Scripts:/mnt/c/Program Files/cmder/vendor/conemu-maximus5:/mnt/c/Program Files/cmder/vendor/conemu-maximus5/ConEmu:/mnt/c/Windows/System32:/mnt/c/Windows:/mnt/c/Windows/System32/wbem:/mnt/c/Windows/System32/WindowsPowerShell/v1.0:/mnt/c/Windows/System32/OpenSSH:/mnt/c/Users/tiago/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/tiago/AppData/Local/Programs/Microsoft VS Code/bin
@@ -14,10 +14,7 @@ Platform:
   linux x64
 
 Trace: 
-  Error: connect ECONNREFUSED 104.16.19.35:443
-      at Object._errnoException (util.js:1022:11)
-      at _exceptionWithHostPort (util.js:1044:20)
-      at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  Error: ENOENT: no such file or directory, scandir '/mnt/c/Users/tiago/Documents/Projects/react-blockbuster/demo-simple/node_modules/browser-resolve/node_modules/resolve/test/resolver/punycode/node_modules'
 
 npm manifest: 
   {
@@ -32,7 +29,7 @@ npm manifest:
       "start:mock": "yarn start & yarn stub",
       "test": "jest",
       "eslint": "eslint src --quiet",
-      "stub": "nodemon stub --exec babel-node --presets=@babel/preset-env"
+      "stub": "nodemon node_modules/stub-server --exec babel-node --presets=@babel/preset-env --ignore=^node_modules/lodash"
     },
     "dependencies": {
       "@babel/runtime": "^7.4.3",
@@ -58,9 +55,7 @@ npm manifest:
       "@babel/plugin-transform-runtime": "^7.4.3",
       "@babel/preset-env": "^7.4.4",
       "@babel/preset-react": "^7.0.0",
-      "@babel/preset-typescript": "^7.3.3",
       "@hapi/joi": "^15.0.0",
-      "@types/lodash": "^4.14.123",
       "babel-core": "^7.0.0-bridge.0",
       "babel-eslint": "^10.0.1",
       "babel-jest": "^23.4.2",
@@ -73,7 +68,6 @@ npm manifest:
       "eslint-config-airbnb": "^17.1.0",
       "eslint-import-resolver-babel-module": "^5.0.1",
       "eslint-import-resolver-webpack": "^0.10.1",
-      "eslint-plugin-flowtype": "^3.6.1",
       "eslint-plugin-import": "^2.16.0",
       "eslint-plugin-jsx-a11y": "^6.2.1",
       "eslint-plugin-react": "^7.12.4",
@@ -85,7 +79,8 @@ npm manifest:
       "nodemon": "^1.18.11",
       "webpack": "^4.26.0",
       "webpack-cli": "^3.1.2",
-      "webpack-dev-server": "^3.1.10"
+      "webpack-dev-server": "^3.1.10",
+      "stub-server": "../stub"
     }
   }
 
@@ -7150,6 +7145,9 @@ Lockfile:
   strip-json-comments@^2.0.1, strip-json-comments@~2.0.1:
     version "2.0.1"
     resolved "https://registry.yarnpkg.com/strip-json-comments/-/strip-json-comments-2.0.1.tgz#3c531942e908c2697c0ec344858c286c7ca0a60a"
+  
+  stub-server@../stub:
+    version "0.0.0"
   
   styled-components@^4.2.0:
     version "4.2.0"

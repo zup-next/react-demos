@@ -18,18 +18,23 @@ class Home extends PureComponent {
 
   renderError = () => <Content>Error!</Content>
 
-  renderContent = movie => (
-    <Content>
-      <Poster src={movie.poster} />
-      <MovieData>
-        <PageTitle>{movie.title} ({movie.year})</PageTitle>
-        <Description>{movie.description}</Description>
-        <Link to={`/payment/${movie.id}`}>
-          <Button>Buy for ${movie.price}</Button>
-        </Link>
-      </MovieData>
-    </Content>
-  )
+  renderContent = () => {
+    const { movie } = this.props
+    const { poster, title, year, description, id, price } = movie.data
+
+    return (
+      <Content>
+        <Poster src={poster} />
+        <MovieData>
+          <PageTitle>{title} ({year})</PageTitle>
+          <Description>{description}</Description>
+          <Link to={`/payment/${id}`}>
+            <Button>Buy for ${price}</Button>
+          </Link>
+        </MovieData>
+      </Content>
+    )
+  }
 
   render() {
     const { movie } = this.props
@@ -38,7 +43,7 @@ class Home extends PureComponent {
     if (isLoading(movie)) return this.renderLoading()
     if (hasLoadError(movie)) return this.renderError()
 
-    return this.renderContent(movie.data)
+    return this.renderContent()
   }
 
 }

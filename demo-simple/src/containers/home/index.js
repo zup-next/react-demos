@@ -18,14 +18,18 @@ class Home extends PureComponent {
 
   renderError = () => <Content>Error!</Content>
 
-  renderContent = movies => (
-    <Content>
-      <Center><PageTitle>Catalog</PageTitle></Center>
-      <List>
-        {map(movies, movie => <Movie key={movie.id} {...movie} />)}
-      </List>
-    </Content>
-  )
+  renderContent = () => {
+    const { catalog } = this.props
+
+    return (
+      <Content>
+        <Center><PageTitle>Catalog</PageTitle></Center>
+        <List>
+          {map(catalog.data, movie => <Movie key={movie.id} {...movie} />)}
+        </List>
+      </Content>
+    )
+  }
 
   render() {
     const { catalog } = this.props
@@ -34,7 +38,7 @@ class Home extends PureComponent {
     if (isLoading(catalog)) return this.renderLoading()
     if (hasLoadError(catalog)) return this.renderError()
 
-    return this.renderContent(catalog.data)
+    return this.renderContent()
   }
 
 }
