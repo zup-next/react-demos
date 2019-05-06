@@ -7,7 +7,7 @@ module.exports = {
   devtool: 'source-map',
 
   entry: {
-    index: path.resolve(__dirname, 'src', 'index.js'),
+    index: path.resolve(__dirname, 'src', 'index.tsx'),
   },
 
   devServer: {
@@ -27,14 +27,15 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/,
+        test: /\.(ts|tsx)$/,
         exclude: /node_modules/,
         loader: 'babel-loader',
-        query: {
-          presets: ['@babel/preset-react'],
-        },
       },
     ],
+  },
+
+  resolve: {
+    extensions: ['.ts', '.tsx', '.js', '.jsx'],
   },
 
   plugins: [

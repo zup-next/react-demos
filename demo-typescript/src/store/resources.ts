@@ -5,7 +5,7 @@ import api from '../api'
 const profile = createResource('PROFILE', {
   load: api.loadProfile,
   update: api.saveProfile,
-}, {})
+})
 
 const catalog = createResource('CATALOG', { load: api.loadCatalog })
 
