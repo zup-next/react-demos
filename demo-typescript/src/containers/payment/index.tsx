@@ -35,6 +35,67 @@ interface State  {
   selectedPaymentMethod: PaymentType,
 }
 
+const Loading = () => <Content>Loading...</Content>
+
+const LoadError = () => <Content>Error!</Content>
+
+const OrderProgress = () => <Content>Please, wait while we process your order...</Content>
+
+const OrderError = ({ resetOrderStatus }: { resetOrderStatus: () => void }) => (
+  <Content>
+    <p>Sorry. We could not process your order. Please, try again later.</p>
+    <Button onClick={resetOrderStatus}>Try again</Button>
+  </Content>
+)
+
+const OrderSuccess = ({ balance }: { balance: Number }) => (
+  <Content>
+    <p>Congratulations! You have acquired a new Title!!!</p>
+    <p>Expect to receive a download link in your inbox in the next few minutes.</p>
+    <p>Thank you for buying with us. Your current balance is ${balance}</p>
+    <p><Link to="/"><Button>Go back to catalog</Button></Link></p>
+  </Content>
+)
+
+type SummaryProps = {
+  movie: Movie,
+  wallet: Wallet,
+  selectedPaymentMethod: PaymentType,
+  selectPaymentMethod: (paymentMethod: PaymentType) => void,
+  createOrder: (order: Order) => void,
+}
+
+const Summary = ({ movie, wallet, selectedPaymentMethod, selectPaymentMethod, createOrder }: SummaryProps) => (
+  <Content>
+    <PageTitle>Order Summary</PageTitle>
+    <Product>Item: {movie.title}</Product>
+    <Detail>Order total: ${movie.price}</Detail>
+    <Detail>Choose a payment method:</Detail>
+    <PaymentMethodList>
+      <PaymentMethod
+        label="Balance"
+        value={`$${wallet.balance}`}
+        selected={selectedPaymentMethod.type === 'balance'}
+        onClick={() => selectPaymentMethod({ type: 'balance' })}
+      />
+      {map(wallet.cards, card => (
+        <PaymentMethod
+          key={card.id}
+          label={card.brand}
+          value={`**** **** **** ${card.number}`}
+          selected={selectedPaymentMethod.type === 'card' && selectedPaymentMethod.id === card.id}
+          onClick={() => selectPaymentMethod({ type: 'card', id: card.id })}
+        />
+      ))}
+    </PaymentMethodList>
+    <Center>
+      <Button onClick={() => createOrder({ productId: movie.id, payment: selectedPaymentMethod })}>
+        Place order
+      </Button>
+    </Center>
+  </Content>
+)
+
 class Home extends PureComponent<Props, State> {
 
   constructor(props: Props) {
@@ -56,88 +117,26 @@ class Home extends PureComponent<Props, State> {
   selectPaymentMethod = (paymentMethod: PaymentType) =>
     this.setState({ selectedPaymentMethod: paymentMethod })
 
-  placeOrder = () => {
-    const { createOrder, movie } = this.props
+  render() {
+    const { movie, wallet, order, resetOrderStatus, createOrder } = this.props
     const { selectedPaymentMethod } = this.state
 
-    createOrder({ productId: movie.data.id, payment: selectedPaymentMethod })
-  }
-
-  renderLoading = () => <Content>Loading...</Content>
-
-  renderLoadError = () => <Content>Error!</Content>
-
-  renderOrderProgress = () => <Content>Please, wait while we process your order...</Content>
-
-  renderOrderError = () => {
-    const { resetOrderStatus } = this.props
-  
-    return (
-      <Content>
-        <p>Sorry. We could not process your order. Please, try again later.</p>
-        <Button onClick={resetOrderStatus}>Try again</Button>
-      </Content>
-    )
-  }
-
-  renderOrderSuccess = () => {
-    const { wallet } = this.props
+    if (isLoading(movie) || isLoading(wallet)) return <Loading />
+    if (hasLoadError(movie) || hasLoadError(wallet)) return <LoadError />
+    if (movie.data === null || wallet.data === null) return null
+    if (isCreating(order)) return <OrderProgress />
+    if (hasCreateError(order)) return <OrderError resetOrderStatus={resetOrderStatus} />
+    if (hasCreateSuccess(order)) return <OrderSuccess balance={wallet.data.balance} />
 
     return (
-      <Content>
-        <p>Congratulations! You have acquired a new Title!!!</p>
-        <p>Expect to receive a download link in your inbox in the next few minutes.</p>
-        <p>Thank you for buying with us. Your current balance is ${wallet.data.balance}</p>
-        <p><Link to="/"><Button>Go back to catalog</Button></Link></p>
-      </Content>
+      <Summary
+        movie={movie.data}
+        wallet={wallet.data}
+        selectedPaymentMethod={selectedPaymentMethod}
+        selectPaymentMethod={this.selectPaymentMethod}
+        createOrder={createOrder}
+      />
     )
-  }
-
-  renderContent = () => {
-    const { movie, wallet } = this.props
-    const { title, price } = movie.data
-    const { balance, cards } = wallet.data
-    const { selectedPaymentMethod: selected } = this.state
-  
-    return (
-      <Content>
-        <PageTitle>Order Summary</PageTitle>
-        <Product>Item: {title}</Product>
-        <Detail>Order total: ${price}</Detail>
-        <Detail>Choose a payment method:</Detail>
-        <PaymentMethodList>
-          <PaymentMethod
-            label="Balance"
-            value={`$${balance}`}
-            selected={selected.type === 'balance'}
-            onClick={() => this.selectPaymentMethod({ type: 'balance' })}
-          />
-          {map(cards, card => (
-            <PaymentMethod
-              key={card.id}
-              label={card.brand}
-              value={`**** **** **** ${card.number}`}
-              selected={selected.type === 'card' && selected.id === card.id}
-              onClick={() => this.selectPaymentMethod({ type: 'card', id: card.id })}
-            />
-          ))}
-        </PaymentMethodList>
-        <Center><Button onClick={this.placeOrder}>Place order</Button></Center>
-      </Content>
-    )
-  }
-
-  render() {
-    const { movie, wallet, order } = this.props
-
-    if (isPristine(movie) || isPristine(wallet)) return null
-    if (isLoading(movie) || isLoading(wallet)) return this.renderLoading()
-    if (hasLoadError(movie) || hasLoadError(wallet)) return this.renderLoadError()
-    if (isCreating(order)) return this.renderOrderProgress()
-    if (hasCreateError(order)) return this.renderOrderError()
-    if (hasCreateSuccess(order)) return this.renderOrderSuccess()
-
-    return this.renderContent()
   }
 
 }
