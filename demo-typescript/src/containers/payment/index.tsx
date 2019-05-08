@@ -60,7 +60,7 @@ class Home extends PureComponent<Props, State> {
     const { createOrder, movie } = this.props
     const { selectedPaymentMethod } = this.state
 
-    createOrder({ productId: movie.data.id, payment: selectedPaymentMethod })
+    createOrder({ productId: movie.data!.id, payment: selectedPaymentMethod })
   }
 
   renderLoading = () => <Content>Loading...</Content>
@@ -71,7 +71,7 @@ class Home extends PureComponent<Props, State> {
 
   renderOrderError = () => {
     const { resetOrderStatus } = this.props
-  
+
     return (
       <Content>
         <p>Sorry. We could not process your order. Please, try again later.</p>
@@ -87,7 +87,7 @@ class Home extends PureComponent<Props, State> {
       <Content>
         <p>Congratulations! You have acquired a new Title!!!</p>
         <p>Expect to receive a download link in your inbox in the next few minutes.</p>
-        <p>Thank you for buying with us. Your current balance is ${wallet.data.balance}</p>
+        <p>Thank you for buying with us. Your current balance is ${wallet.data!.balance}</p>
         <p><Link to="/"><Button>Go back to catalog</Button></Link></p>
       </Content>
     )
@@ -95,10 +95,10 @@ class Home extends PureComponent<Props, State> {
 
   renderContent = () => {
     const { movie, wallet } = this.props
-    const { title, price } = movie.data
-    const { balance, cards } = wallet.data
+    const { title, price } = movie.data!
+    const { balance, cards } = wallet.data!
     const { selectedPaymentMethod: selected } = this.state
-  
+
     return (
       <Content>
         <PageTitle>Order Summary</PageTitle>
