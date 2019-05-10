@@ -34,7 +34,7 @@ interface State  {
   selectedPaymentMethod: PaymentType,
 }
 
-class Home extends PureComponent<Props, State> {
+class Payment extends PureComponent<Props, State> {
 
   constructor(props: Props) {
     super(props)
@@ -95,4 +95,4 @@ const actions = {
   resetOrderStatus: resources.order.actions.resetCreateStatus,
 }
 
-export default connect(mapStateToProps, actions)(Home)
+export default connect(mapStateToProps, actions)(Payment)

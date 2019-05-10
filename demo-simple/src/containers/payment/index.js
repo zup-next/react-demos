@@ -13,7 +13,7 @@ import {
   hasCreateError,
 } from '@zup-it/redux-resource'
 
-class Home extends PureComponent {
+class Payment extends PureComponent {
 
   constructor(props) {
     super(props)
@@ -73,4 +73,4 @@ const actions = {
   resetOrderStatus: resources.order.actions.resetCreateStatus,
 }
 
-export default connect(mapStateToProps, actions)(Home)
+export default connect(mapStateToProps, actions)(Payment)
