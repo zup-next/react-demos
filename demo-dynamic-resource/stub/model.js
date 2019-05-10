@@ -105,6 +105,6 @@ const movies = [
   },
 ]
 
-export const getCatalog = () => movies.map({ id, title } => { id, title })
+export const getCatalog = () => movies.map(({ id, title }) => ({ id, title }))
 
-export const getMovie = (id) => movies.find(movie => movie.id === id)
+export const getMovie = id => movies.find(movie => movie.id === id)

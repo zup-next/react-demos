@@ -10,18 +10,17 @@
     "start:mock": "yarn start & yarn stub",
     "test": "jest",
     "eslint": "eslint src --quiet",
-    "stub": "nodemon node_modules/stub-server --exec babel-node --presets=@babel/preset-env --ignore=^node_modules/lodash"
+    "stub": "nodemon stub --exec babel-node --presets=@babel/preset-env"
   },
   "dependencies": {
     "@babel/runtime": "^7.4.3",
-    "@zup-it/redux-resource": "git+ssh://git@github.com:Tiagoperes/redux-resource.git#031da7ff8e25623ff7e509146ddb5387fe548ea9",
+    "@zup-it/redux-resource": "git+ssh://git@github.com:Tiagoperes/redux-resource.git#8e86fb324097d78c61be17d3176044c7f9c40c07",
     "axios": "^0.18.0",
     "lodash": "^4.17.11",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
     "react-hot-loader": "^4.3.12",
     "react-redux": "^5.1.1",
-    "react-router-dom": "^5.0.0",
     "redux": "^4.0.1",
     "redux-saga": "^1.0.2",
     "styled-components": "^4.2.0"
@@ -36,7 +35,6 @@
     "@babel/plugin-transform-runtime": "^7.4.3",
     "@babel/preset-env": "^7.4.4",
     "@babel/preset-react": "^7.0.0",
-    "@hapi/joi": "^15.0.0",
     "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "^10.0.1",
     "babel-jest": "^23.4.2",
@@ -58,7 +56,6 @@
     "html-webpack-plugin": "^3.2.0",
     "jest": "^24.7.0",
     "nodemon": "^1.18.11",
-    "stub-server": "../stub",
     "webpack": "^4.26.0",
     "webpack-cli": "^3.1.2",
     "webpack-dev-server": "^3.1.10"
