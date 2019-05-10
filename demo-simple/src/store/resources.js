@@ -1,4 +1,4 @@
-import createResource from '@zup-it/redux-resource'
+import { createResource } from '@zup-it/redux-resource'
 import { put } from 'redux-saga/effects'
 import api from '../api'
 
