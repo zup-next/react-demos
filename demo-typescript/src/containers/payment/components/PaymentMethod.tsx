@@ -1,5 +1,5 @@
 import React from 'react'
-import { PaymentContainer, PaymentLabel, PaymentValue } from './styled'
+import { PaymentContainer, PaymentLabel, PaymentValue } from '../styled'
 
 interface Props {
   label: string,

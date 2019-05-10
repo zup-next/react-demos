@@ -2,15 +2,12 @@ import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import resources from '../../store/resources'
 import { Resource, isPristine, isLoading, hasLoadError } from '@zup-it/redux-resource'
-import Movie from './Movie'
-import { List } from './styled'
-import { Content, PageTitle, Center } from '../../components/commons.styled'
-import { map } from 'lodash'
-import { Catalog, ReduxState } from 'types'
+import { Catalog, Loading, Error } from './components'
+import { Catalog as CatalogType, ReduxState } from 'types'
 
 interface Props {
   loadCatalog: () => void,
-  catalog: Resource<Catalog>,
+  catalog: Resource<CatalogType>,
 }
 
 class Home extends PureComponent<Props> {
@@ -20,31 +17,14 @@ class Home extends PureComponent<Props> {
     loadCatalog()
   }
 
-  renderLoading = () => <Content>Loading...</Content>
-
-  renderError = () => <Content>Error!</Content>
-
-  renderContent = () => {
-    const { catalog } = this.props
-  
-    return (
-      <Content>
-        <Center><PageTitle>Catalog</PageTitle></Center>
-        <List>
-          {map(catalog.data, movie => <Movie key={movie.id} {...movie} />)}
-        </List>
-      </Content>
-    )
-  }
-
   render() {
     const { catalog } = this.props
 
     if (isPristine(catalog)) return null
-    if (isLoading(catalog)) return this.renderLoading()
-    if (hasLoadError(catalog)) return this.renderError()
+    if (isLoading(catalog)) return <Loading />
+    if (hasLoadError(catalog)) return <Error />
 
-    return this.renderContent()
+    return <Catalog catalog={catalog.data!} />
   }
 
 }

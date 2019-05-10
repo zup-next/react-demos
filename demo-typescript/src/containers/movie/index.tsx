@@ -3,57 +3,34 @@ import { connect } from 'react-redux'
 import resources from '../../store/resources'
 import { Resource, isPristine, isLoading, hasLoadError } from '@zup-it/redux-resource'
 import { find } from 'lodash'
-import { Link, RouteComponentProps } from 'react-router-dom'
-import { Poster, MovieData, Description } from './styled'
-import { Content, PageTitle, Button } from '../../components/commons.styled'
-import { Movie, Catalog, ReduxState } from 'types'
+import { RouteComponentProps } from 'react-router-dom'
+import { Loading, Error, MovieDetails } from './components'
+import { Movie as MovieType, Catalog, ReduxState } from 'types'
 
 type RouteProps = RouteComponentProps<{ id: string }>
 
 interface ComponentProps {
   loadCatalog: () => void,
-  movie: Resource<Movie>,
+  movie: Resource<MovieType>,
 }
 
 type Props = ComponentProps & RouteProps
 
-class MovieDetails extends PureComponent<Props> {
+class Movie extends PureComponent<Props> {
 
   componentDidMount() {
     const { loadCatalog } = this.props
     loadCatalog()
   }
 
-  renderLoading = () => <Content>Loading...</Content>
-
-  renderError = () => <Content>Error!</Content>
-
-  renderContent = () => {
-    const { movie } = this.props
-    const { poster, title, year, description, id, price } = movie.data
-
-    return (
-      <Content>
-        <Poster src={poster} />
-        <MovieData>
-          <PageTitle>{title} ({year})</PageTitle>
-          <Description>{description}</Description>
-          <Link to={`/payment/${id}`}>
-            <Button>Buy for ${price}</Button>
-          </Link>
-        </MovieData>
-      </Content>
-    )
-  }
-
   render() {
     const { movie } = this.props
 
     if (isPristine(movie)) return null
-    if (isLoading(movie)) return this.renderLoading()
-    if (hasLoadError(movie)) return this.renderError()
+    if (isLoading(movie)) return <Loading />
+    if (hasLoadError(movie)) return <Error />
 
-    return this.renderContent()
+    return <MovieDetails {...movie.data!} />
   }
 
 }
@@ -67,4 +44,4 @@ const mapStateToProps = ({ catalog }: ReduxState, ownProps: RouteProps) => ({
 
 const actions = { loadCatalog: resources.catalog.actions.load }
 
-export default connect(mapStateToProps, actions)(MovieDetails)
+export default connect(mapStateToProps, actions)(Movie)

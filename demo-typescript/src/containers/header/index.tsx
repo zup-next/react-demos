@@ -1,8 +1,8 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import resources from '../../store/resources'
-import { HeaderBar, HeaderContent, Top, Bottom } from './styled'
 import { Resource, isPristine, isLoading, hasLoadError } from '@zup-it/redux-resource'
+import { Loading, Error, HeaderInfo } from './components'
 import { Profile, Wallet, ReduxState } from 'types'
 
 interface Props {
@@ -20,38 +20,18 @@ class Header extends PureComponent<Props> {
     loadWallet()
   }
 
-  renderLoading = () => <HeaderBar><HeaderContent>Loading...</HeaderContent></HeaderBar>
-
-  renderError = () => <HeaderBar><HeaderContent>Error!</HeaderContent></HeaderBar>
-
-  renderContent = () => {
-    const { profile, wallet } = this.props
-    const { name, lastname, email } = profile.data
-    const { balance } = wallet.data
-
-    return (
-      <HeaderBar>
-        <HeaderContent>
-          <Top>{name} {lastname}</Top>
-          <Bottom>{email}</Bottom>
-        </HeaderContent>
-        <HeaderContent>
-          <Top>Available balance:</Top>
-          <Bottom>${balance}</Bottom>
-        </HeaderContent>
-      </HeaderBar>
-    )
-  }
-
   render() {
     const { profile, wallet } = this.props
 
     if (isPristine(profile) || isPristine(wallet)) return null
-    if (isLoading(profile) || isLoading(wallet)) return this.renderLoading()
-    if (hasLoadError(profile) || hasLoadError(wallet)) return this.renderError()
+    if (isLoading(profile) || isLoading(wallet)) return <Loading />
+    if (hasLoadError(profile) || hasLoadError(wallet)) return <Error />
 
-    return this.renderContent()
-    
+    const { name, lastname, email } = profile.data!
+    const { balance } = wallet.data!
+
+    return <HeaderInfo name={name} lastname={lastname} email={email} balance={balance} />
+
   }
 
 }
