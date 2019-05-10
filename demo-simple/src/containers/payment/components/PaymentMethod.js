@@ -1,5 +1,5 @@
 import React from 'react'
-import { PaymentContainer, PaymentLabel, PaymentValue } from './styled'
+import { PaymentContainer, PaymentLabel, PaymentValue } from '../styled'
 
 const PaymentMethod = ({ label, value, selected, onClick }) => (
   <PaymentContainer selected={selected} onClick={onClick}>
