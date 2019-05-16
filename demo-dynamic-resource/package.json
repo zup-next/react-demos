@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.4.3",
-    "@zup-it/redux-resource": "git+ssh://git@github.com:Tiagoperes/redux-resource.git#rename-reducers",
+    "@zup-it/redux-resource": "git+ssh://git@github.com:Tiagoperes/redux-resource.git#6adbf3b1fd96106569215ad9f3dbb41131c8956d",
     "axios": "^0.18.0",
     "lodash": "^4.17.11",
     "react": "^16.6.3",
