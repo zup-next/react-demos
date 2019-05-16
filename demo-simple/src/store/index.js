@@ -4,10 +4,10 @@ import resources from './resources'
 import { createEffects } from '@zup-it/redux-resource'
 
 const reducers = combineReducers({
-  catalog: resources.catalog.reducers,
-  order: resources.order.reducers,
-  profile: resources.profile.reducers,
-  wallet: resources.wallet.reducers,
+  catalog: resources.catalog.reducer,
+  order: resources.order.reducer,
+  profile: resources.profile.reducer,
+  wallet: resources.wallet.reducer,
 })
 
 const sagas = function* run() {

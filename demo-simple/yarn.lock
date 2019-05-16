@@ -1110,11 +1110,10 @@
   version "4.2.2"
   resolved "https://registry.yarnpkg.com/@xtuc/long/-/long-4.2.2.tgz#d291c6a4e97989b5c61d9acf396ae4fe133a718d"
 
-"@zup-it/redux-resource@git+ssh://git@github.com:Tiagoperes/redux-resource.git#8e86fb324097d78c61be17d3176044c7f9c40c07":
+"@zup-it/redux-resource@git+ssh://git@github.com:Tiagoperes/redux-resource.git#rename-reducers":
   version "1.0.0"
-  resolved "git+ssh://git@github.com:Tiagoperes/redux-resource.git#8e86fb324097d78c61be17d3176044c7f9c40c07"
+  resolved "git+ssh://git@github.com:Tiagoperes/redux-resource.git#84693c22218bb3131916b19840df57bf82070205"
   dependencies:
-    "@babel/runtime" "^7.4.3"
     lodash "^4.17.11"
     redux "^4.0.1"
     redux-saga "^1.0.2"
