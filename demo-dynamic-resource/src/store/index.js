@@ -4,8 +4,8 @@ import resources from './resources'
 import { createEffects } from '@zup-it/redux-resource'
 
 const reducers = combineReducers({
-  catalog: resources.catalog.reducers,
-  movies: resources.movies.reducers,
+  catalog: resources.catalog.reducer,
+  movies: resources.movies.reducer,
 })
 
 const sagas = function* run() {
