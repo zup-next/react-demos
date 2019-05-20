@@ -1,18 +1,13 @@
 import { createStore, applyMiddleware, combineReducers } from 'redux'
 import createSagaMiddleware from 'redux-saga'
 import resources from './resources'
-import { createEffects } from '@zup-it/redux-resource'
+import { createEffects, getTypeToSagaMap } from '@zup-it/redux-resource'
+import { mapValues } from 'lodash'
 
-const reducers = combineReducers({
-  catalog: resources.catalog.reducer,
-  movies: resources.movies.reducer,
-})
+const reducers = combineReducers(mapValues(resources, 'reducer'))
 
-const sagas = function* run() {
-  yield createEffects({
-    ...resources.catalog.sagas,
-    ...resources.movies.sagas,
-  })
+export const rootSaga = function* run() {
+  yield createEffects(getTypeToSagaMap(mapValues(resources, 'sagas')))
 }
 
 const sagaMiddleware = createSagaMiddleware()
@@ -22,6 +17,6 @@ const store = createStore(
   applyMiddleware(sagaMiddleware),
 )
 
-sagaMiddleware.run(sagas)
+sagaMiddleware.run(rootSaga)
 
 export default store
