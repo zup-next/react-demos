@@ -1,10 +1,21 @@
-import axios, { AxiosPromise } from 'axios'
+import axios, { AxiosPromise, AxiosError, AxiosResponse } from 'axios'
+import ApiError from './ApiError'
+import { Profile, Wallet, Catalog, Order } from '../types'
+
+export const url = 'http://localhost:3000'
 
 const api = axios.create({
-  baseURL: 'http://localhost:3000',
+  baseURL: url,
 })
 
-api.interceptors.response.use(response => response.data)
+const onResponseSuccess = (response: AxiosResponse) => response.data
+
+const onResponseError = (error: AxiosError) => {
+  if (error && error.response) throw new ApiError(error.response.status, error.response.data)
+  throw error
+}
+
+api.interceptors.response.use(onResponseSuccess, onResponseError)
 
 const loadProfile = (): AxiosPromise<Profile> => api.get('/profile')
 

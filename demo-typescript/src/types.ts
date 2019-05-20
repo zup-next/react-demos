@@ -51,6 +51,12 @@ export interface Order {
   payment: PaymentMethod,
 }
 
+export interface ApiError {
+  message: string,
+  status?: number,
+  data?: any,
+}
+
 export interface ReduxState {
   profile: Resource<Profile>,
   wallet: Resource<Wallet>,
