@@ -1,6 +1,6 @@
-import React, { useEffect, useState, FC } from 'react'
+import React, { useEffect, useState, FC, useMemo } from 'react'
 import { useDispatch } from 'react-redux'
-import { useResource, dispatchOnStart } from '../../hooks/redux'
+import { useResource } from '../../hooks/redux'
 import resources from '../../store/resources'
 import { find } from 'lodash'
 import { RouteComponentProps } from 'react-router-dom'
@@ -30,10 +30,10 @@ const Payment: FC<Props> = (props) => {
   const dispatch = useDispatch()
   const resetOrderStatus = () => dispatch(resources.order.actions.resetCreateStatus())
 
-  dispatchOnStart([
-    resources.catalog.actions.load(),
-    resources.wallet.actions.load(),
-  ])
+  useMemo(() => {
+    dispatch(resources.catalog.actions.load())
+    dispatch(resources.wallet.actions.load())
+  }, [])
 
   useEffect(() => resetOrderStatus, [])
 
@@ -55,4 +55,4 @@ const Payment: FC<Props> = (props) => {
   )
 }
 
-export default Payment
+export default React.memo(Payment)
