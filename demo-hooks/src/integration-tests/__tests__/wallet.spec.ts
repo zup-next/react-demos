@@ -17,5 +17,6 @@ describe('Resource tests: wallet', () => {
     },
     loadPayload,
     errorPayload,
+    shouldCache: true,
   })
 })
