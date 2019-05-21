@@ -1,6 +1,6 @@
 import React, { useEffect, useState, FC } from 'react'
 import { useDispatch } from 'react-redux'
-import useResource from '../../hooks/useResource'
+import { useResource, dispatchOnStart } from '../../hooks/redux'
 import resources from '../../store/resources'
 import { find } from 'lodash'
 import { RouteComponentProps } from 'react-router-dom'
@@ -30,12 +30,12 @@ const Payment: FC<Props> = (props) => {
   const dispatch = useDispatch()
   const resetOrderStatus = () => dispatch(resources.order.actions.resetCreateStatus())
 
-  useEffect(() => {
-    dispatch(resources.catalog.actions.load())
-    dispatch(resources.wallet.actions.load())
+  dispatchOnStart([
+    resources.catalog.actions.load(),
+    resources.wallet.actions.load(),
+  ])
 
-    return resetOrderStatus
-  }, [])
+  useEffect(() => resetOrderStatus, [])
 
   if (isPristine(catalog) || isPristine(wallet)) return null
   if (isLoading(catalog) || isLoading(wallet)) return <Loading />

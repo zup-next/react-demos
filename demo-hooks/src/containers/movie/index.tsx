@@ -1,6 +1,5 @@
-import React, { useEffect, FC } from 'react'
-import { useDispatch } from 'react-redux'
-import useResource from '../../hooks/useResource'
+import React, { FC } from 'react'
+import { useResource, dispatchOnStart } from '../../hooks/redux'
 import resources from '../../store/resources'
 import { isPristine, isLoading, hasLoadError } from '@zup-it/redux-resource'
 import { find } from 'lodash'
@@ -16,11 +15,8 @@ const findMovieById = (catalog: Catalog | null, id: string) =>
 const Movie: FC<Props> = (props) => {
   const catalog = useResource<Catalog>('catalog')
   const movie = findMovieById(catalog.data, props.match.params.id)
-  const dispatch = useDispatch()
 
-  useEffect(() => {
-    dispatch(resources.catalog.actions.load())
-  }, [])
+  dispatchOnStart(resources.catalog.actions.load())
 
   if (isPristine(catalog)) return null
   if (isLoading(catalog)) return <Loading />
