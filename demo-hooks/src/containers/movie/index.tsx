@@ -1,5 +1,6 @@
-import React, { FC } from 'react'
-import { useResource, dispatchOnStart } from '../../hooks/redux'
+import React, { FC, useMemo } from 'react'
+import { useResource } from '../../hooks/redux'
+import { useDispatch } from 'react-redux'
 import resources from '../../store/resources'
 import { isPristine, isLoading, hasLoadError } from '@zup-it/redux-resource'
 import { find } from 'lodash'
@@ -15,8 +16,9 @@ const findMovieById = (catalog: Catalog | null, id: string) =>
 const Movie: FC<Props> = (props) => {
   const catalog = useResource<Catalog>('catalog')
   const movie = findMovieById(catalog.data, props.match.params.id)
+  const dispatch = useDispatch()
 
-  dispatchOnStart(resources.catalog.actions.load())
+  useMemo(() => dispatch(resources.catalog.actions.load()), [])
 
   if (isPristine(catalog)) return null
   if (isLoading(catalog)) return <Loading />
@@ -25,4 +27,4 @@ const Movie: FC<Props> = (props) => {
   return <MovieDetails {...movie!} />
 }
 
-export default Movie
+export default React.memo(Movie)

@@ -1,5 +1,6 @@
-import React, { FC } from 'react'
-import { useResource, dispatchOnStart } from '../../hooks/redux'
+import React, { FC, useMemo } from 'react'
+import { useDispatch } from 'react-redux'
+import { useResource } from '../../hooks/redux'
 import resources from '../../store/resources'
 import { isPristine, isLoading, hasLoadError } from '@zup-it/redux-resource'
 import { Catalog, Loading, Error } from './components'
@@ -7,8 +8,9 @@ import { Catalog as CatalogType } from 'types'
 
 const Home: FC = () => {
   const catalog = useResource<CatalogType>('catalog')
+  const dispatch = useDispatch()
 
-  dispatchOnStart(resources.catalog.actions.load())
+  useMemo(() => dispatch(resources.catalog.actions.load()), [])
 
   if (isPristine(catalog)) return null
   if (isLoading(catalog)) return <Loading />
@@ -17,4 +19,4 @@ const Home: FC = () => {
   return <Catalog catalog={catalog.data!} />
 }
 
-export default Home
+export default React.memo(Home)
