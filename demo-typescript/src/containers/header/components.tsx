@@ -1,6 +1,5 @@
 import React from 'react'
 import { HeaderBar, HeaderContent, Top, Bottom } from './styled'
-import { Profile, Wallet } from 'types'
 
 export const Loading = () => <HeaderBar><HeaderContent>Loading...</HeaderContent></HeaderBar>
 
