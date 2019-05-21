@@ -1,14 +1,13 @@
-import React, { FC, useMemo } from 'react'
+import React, { FC, useMemo, memo } from 'react'
 import { useDispatch } from 'react-redux'
 import { useResource } from '../../hooks/redux'
 import resources from '../../store/resources'
 import { isPristine, isLoading, hasLoadError } from '@zup-it/redux-resource'
 import { Loading, Error, HeaderInfo } from './components'
-import { Profile, Wallet } from 'types'
 
 const Header: FC = () => {
-  const profile = useResource<Profile>('profile')
-  const wallet = useResource<Wallet>('wallet')
+  const profile = useResource('profile')
+  const wallet = useResource('wallet')
   const dispatch = useDispatch()
 
   useMemo(() => {
@@ -26,4 +25,4 @@ const Header: FC = () => {
   return <HeaderInfo name={name} lastname={lastname} email={email} balance={balance} />
 }
 
-export default React.memo(Header)
+export default memo(Header)

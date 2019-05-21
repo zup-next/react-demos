@@ -1,4 +1,4 @@
-import React, { useEffect, useState, FC, useMemo } from 'react'
+import React, { useEffect, useState, FC, useMemo, memo } from 'react'
 import { useDispatch } from 'react-redux'
 import { useResource } from '../../hooks/redux'
 import resources from '../../store/resources'
@@ -23,8 +23,8 @@ const findMovieById = (catalog: Catalog | null, id: string) =>
 
 const Payment: FC<Props> = (props) => {
   const [selectedPaymentMethod, selectPaymentMethod] = useState<PaymentType>({ type: 'balance' })
-  const catalog = useResource<Catalog>('catalog')
-  const wallet = useResource<Wallet>('wallet')
+  const catalog = useResource('catalog')
+  const wallet = useResource('wallet')
   const order = useResource('order')
   const movie = findMovieById(catalog.data, props.match.params.id)
   const dispatch = useDispatch()
@@ -55,4 +55,4 @@ const Payment: FC<Props> = (props) => {
   )
 }
 
-export default React.memo(Payment)
+export default memo(Payment)
