@@ -1,4 +1,4 @@
-import { Resource } from '@zup-it/redux-resource'
+import { Resource } from '@zup-next/redux-resource'
 
 export interface Profile {
   name: string,

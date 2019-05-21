@@ -11,7 +11,7 @@ import {
   isCreating,
   hasCreateSuccess,
   hasCreateError,
-} from '@zup-it/redux-resource'
+} from '@zup-next/redux-resource'
 
 class Payment extends PureComponent {
 

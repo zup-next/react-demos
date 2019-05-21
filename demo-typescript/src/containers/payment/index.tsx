@@ -13,7 +13,7 @@ import {
   isCreating,
   hasCreateSuccess,
   hasCreateError,
-} from '@zup-it/redux-resource'
+} from '@zup-next/redux-resource'
 import { Movie, Catalog, Wallet, Order, PaymentMethod as PaymentType, ReduxState } from 'types'
 
 type RouteProps = RouteComponentProps<{ id: string }>

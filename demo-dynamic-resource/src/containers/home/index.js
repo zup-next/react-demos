@@ -1,7 +1,7 @@
 import React, { PureComponent, Fragment } from 'react'
 import { connect } from 'react-redux'
 import resources from '../../store/resources'
-import { isPristine, isLoading, hasLoadError } from '@zup-it/redux-resource'
+import { isPristine, isLoading, hasLoadError } from '@zup-next/redux-resource'
 import { Content, PageTitle, CatalogList } from './styled'
 import { map } from 'lodash'
 import CatalogItem from './CatalogItem'
@@ -37,8 +37,6 @@ class Home extends PureComponent {
 
   render() {
     const { catalog, movies, loadMovie } = this.props
-
-    console.log(movies)
 
     if (isPristine(catalog)) return null
     if (isLoading(catalog)) return <Loading />

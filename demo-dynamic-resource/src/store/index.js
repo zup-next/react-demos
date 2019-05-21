@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware, combineReducers } from 'redux'
 import createSagaMiddleware from 'redux-saga'
 import resources from './resources'
-import { createEffects, getTypeToSagaMap } from '@zup-it/redux-resource'
+import { createEffects, getTypeToSagaMap } from '@zup-next/redux-resource'
 import { mapValues } from 'lodash'
 
 const reducers = combineReducers(mapValues(resources, 'reducer'))

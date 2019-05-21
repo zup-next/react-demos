@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.4.3",
-    "@zup-it/redux-resource": "git+ssh://git@github.com:Tiagoperes/redux-resource.git#a9d41ef67be8f730010d08bc80fe92f42bcddf95",
+    "@zup-next/redux-resource": "^1.0.0",
     "axios": "^0.18.0",
     "lodash": "^4.17.11",
     "react": "^16.6.3",

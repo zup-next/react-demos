@@ -3,7 +3,7 @@ import SagaTester from 'redux-saga-tester'
 import { rootSaga } from '../store'
 import { mapValues } from 'lodash'
 import ApiError from '../api/ApiError'
-import { Status, createResourceInitialState } from '@zup-it/redux-resource'
+import { Status, createResourceInitialState } from '@zup-next/redux-resource'
 
 const testSuccess = async (resourceName, operation, payload) => {
   const resource = resources[resourceName]

@@ -1,4 +1,4 @@
-import { createResource, createDynamicResource } from '@zup-it/redux-resource'
+import { createResource, createDynamicResource } from '@zup-next/redux-resource'
 import api from '../api'
 
 const catalog = createResource('CATALOG', { load: api.loadCatalog })

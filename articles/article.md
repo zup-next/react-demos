@@ -85,7 +85,7 @@ Now that we can connect to the api, we can create the actions, reducers and saga
 
 store/resources.js
 ```javascript
-import createResource from '@zup-it/redux-resource'
+import createResource from '@zup-next/redux-resource'
 import api from '../api'
 
 const profile = createResource('PROFILE', {
@@ -124,7 +124,7 @@ store/index.js
 import { createStore, applyMiddleware, combineReducers } from 'redux'
 import createSagaMiddleware from 'redux-saga'
 import resources from './resources'
-import { createEffects } from '@zup-it/redux-resource'
+import { createEffects } from '@zup-next/redux-resource'
 
 const reducers = combineReducers({
   catalog: resources.catalog.reducers,
@@ -176,7 +176,7 @@ import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import resources from '../../store/resources'
 import { HeaderBar, HeaderContent, Top, Bottom } from './styled'
-import { isPristine, isLoading, hasLoadError } from '@zup-it/redux-resource'
+import { isPristine, isLoading, hasLoadError } from '@zup-next/redux-resource'
 
 class Header extends PureComponent {
 
@@ -252,7 +252,7 @@ containers/home/index.js
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import resources from '../../store/resources'
-import { isPristine, isLoading, hasLoadError } from '@zup-it/redux-resource'
+import { isPristine, isLoading, hasLoadError } from '@zup-next/redux-resource'
 import Movie from './Movie'
 import { List } from './styled'
 import { Content, PageTitle, Center } from '../../components/commons.styled'
@@ -303,7 +303,7 @@ containers/movie/index.js
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import resources from '../../store/resources'
-import { isPristine, isLoading, hasLoadError } from '@zup-it/redux-resource'
+import { isPristine, isLoading, hasLoadError } from '@zup-next/redux-resource'
 import { find } from 'lodash'
 import { Link } from 'react-router-dom'
 import { Poster, MovieData, Description } from './styled'
@@ -385,7 +385,7 @@ import {
   isCreating,
   hasCreateSuccess,
   hasCreateError,
-} from '@zup-it/redux-resource'
+} from '@zup-next/redux-resource'
 
 class Home extends PureComponent {
 

@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import resources from '../../store/resources'
-import { Resource, isPristine, isLoading, hasLoadError } from '@zup-it/redux-resource'
+import { Resource, isPristine, isLoading, hasLoadError } from '@zup-next/redux-resource'
 import { Loading, Error, HeaderInfo } from './components'
 import { Profile, Wallet, ReduxState } from 'types'
 

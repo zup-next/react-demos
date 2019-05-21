@@ -1088,9 +1088,9 @@
   version "4.2.2"
   resolved "https://registry.yarnpkg.com/@xtuc/long/-/long-4.2.2.tgz#d291c6a4e97989b5c61d9acf396ae4fe133a718d"
 
-"@zup-it/redux-resource@git+ssh://git@github.com:Tiagoperes/redux-resource.git#a9d41ef67be8f730010d08bc80fe92f42bcddf95":
+"@zup-next/redux-resource@^1.0.0":
   version "1.0.0"
-  resolved "git+ssh://git@github.com:Tiagoperes/redux-resource.git#a9d41ef67be8f730010d08bc80fe92f42bcddf95"
+  resolved "https://registry.yarnpkg.com/@zup-next/redux-resource/-/redux-resource-1.0.0.tgz#53d097fce2e6b44a5ee8eba77077255cedf6fed8"
   dependencies:
     lodash "^4.17.11"
     redux "^4.0.1"

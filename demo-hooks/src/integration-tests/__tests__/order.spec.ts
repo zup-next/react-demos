@@ -1,7 +1,7 @@
 
 import SagaTester from 'redux-saga-tester'
 import { mapValues } from 'lodash'
-import { Status, createResourceInitialState } from '@zup-it/redux-resource'
+import { Status, createResourceInitialState } from '@zup-next/redux-resource'
 import nock from 'nock'
 import { rootSaga } from '../../store'
 import resources from '../../store/resources'

@@ -2,7 +2,7 @@ import React, { FC, useMemo, memo } from 'react'
 import { useDispatch } from 'react-redux'
 import { useResource } from '../../hooks/redux'
 import resources from '../../store/resources'
-import { isPristine, isLoading, hasLoadError } from '@zup-it/redux-resource'
+import { isPristine, isLoading, hasLoadError } from '@zup-next/redux-resource'
 import { Loading, Error, HeaderInfo } from './components'
 
 const Header: FC = () => {
