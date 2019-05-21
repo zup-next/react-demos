@@ -63,3 +63,5 @@ export interface ReduxState {
   catalog: Resource<Catalog>,
   order: Resource<void>,
 }
+
+export type valueof<T> = T[keyof T]

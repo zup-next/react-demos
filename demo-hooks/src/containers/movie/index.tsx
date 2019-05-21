@@ -1,4 +1,4 @@
-import React, { FC, useMemo } from 'react'
+import React, { FC, useMemo, memo } from 'react'
 import { useResource } from '../../hooks/redux'
 import { useDispatch } from 'react-redux'
 import resources from '../../store/resources'
@@ -14,7 +14,7 @@ const findMovieById = (catalog: Catalog | null, id: string) =>
   find(catalog, { id: parseInt(id) }) || null
 
 const Movie: FC<Props> = (props) => {
-  const catalog = useResource<Catalog>('catalog')
+  const catalog = useResource('catalog')
   const movie = findMovieById(catalog.data, props.match.params.id)
   const dispatch = useDispatch()
 
@@ -27,4 +27,4 @@ const Movie: FC<Props> = (props) => {
   return <MovieDetails {...movie!} />
 }
 
-export default React.memo(Movie)
+export default memo(Movie)
