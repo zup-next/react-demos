@@ -1,6 +1,7 @@
 import { createStore, applyMiddleware, combineReducers } from 'redux'
 import createSagaMiddleware from 'redux-saga'
 import resources from './resources'
+import cacheManager from './cache'
 import { createEffects, getTypeToSagaMap } from '@zup-it/redux-resource'
 import { mapValues } from 'lodash'
 
@@ -14,7 +15,7 @@ const sagaMiddleware = createSagaMiddleware()
 
 const store = createStore(
   reducers,
-  applyMiddleware(sagaMiddleware),
+  applyMiddleware(cacheManager.getMiddleware(), sagaMiddleware),
 )
 
 sagaMiddleware.run(rootSaga)
