@@ -17,5 +17,6 @@ describe('Resource tests: catalog', () => {
     },
     loadPayload,
     errorPayload,
+    shouldCache: true,
   })
 })

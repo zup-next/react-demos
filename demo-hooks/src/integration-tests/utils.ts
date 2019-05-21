@@ -4,18 +4,22 @@ import { rootSaga } from '../store'
 import { mapValues } from 'lodash'
 import { Status, createResourceInitialState, Operation } from '@zup-it/redux-resource'
 import ApiError from '../api/ApiError'
+import cacheManager from '../store/cache'
 import { ReduxState } from '../types'
 
 type SuccessType = 'LOAD_SUCCESS' | 'CREATE_SUCCESS' | 'UPDATE_SUCCESS' | 'REMOVE_SUCCESS'
 type ErrorType = 'LOAD_ERROR' | 'CREATE_ERROR' | 'UPDATE_ERROR' | 'REMOVE_ERROR'
 
+const createSagaTester = () => new SagaTester({
+  reducers: mapValues(resources, 'reducer'),
+  middlewares: [cacheManager.getMiddleware()],
+})
+
 const testSuccess = async (resourceName: keyof ReduxState, operation: Operation, payload?: any) => {
   const resource = resources[resourceName]
   const successType = `${operation.toUpperCase()}_SUCCESS` as SuccessType
 
-  const sagaTester = new SagaTester({
-    reducers: mapValues(resources, 'reducer'),
-  })
+  const sagaTester = createSagaTester()
 
   sagaTester.start(rootSaga)
   sagaTester.dispatch(resource.actions[operation]())
@@ -38,9 +42,7 @@ const testError = async (
   const resource = resources[resourceName]
   const errorType = `${operation.toUpperCase()}_ERROR` as ErrorType
 
-  const sagaTester = new SagaTester({
-    reducers: mapValues(resources, 'reducer'),
-  })
+  const sagaTester = createSagaTester()
 
   sagaTester.start(rootSaga)
   sagaTester.dispatch(resource.actions[operation]())
@@ -54,6 +56,23 @@ const testError = async (
       error: new ApiError(errorStatus, errorPayload),
     },
   })
+}
+
+const testCache = async (
+  resourceName: keyof ReduxState,
+  expectedActionType: 'LOAD_SUCCESS' | 'LOAD_ERROR',
+  expectedStatus: Status,
+) => {
+  const resource = resources[resourceName]
+
+  const sagaTester = createSagaTester()
+
+  sagaTester.start(rootSaga)
+  sagaTester.dispatch(resource.actions.load())
+  await sagaTester.waitFor(resource.types[expectedActionType])
+  sagaTester.dispatch(resource.actions.load())
+  const state = sagaTester.getState() as ReduxState
+  expect(state[resourceName].load.status).toBe(expectedStatus)
 }
 
 type mock = {
@@ -72,6 +91,7 @@ interface TestResourceProps {
   loadPayload?: any,
   errorStatus?: number,
   errorPayload: any,
+  shouldCache?: boolean,
 }
 
 export const testResource = ({
@@ -80,7 +100,13 @@ export const testResource = ({
   loadPayload,
   errorStatus = 500,
   errorPayload,
+  shouldCache = false,
 }: TestResourceProps) => {
+
+  beforeEach(() => {
+    cacheManager.invalidateCacheFor(resources[resourceName].types.LOAD)
+  })
+
   if (mocks.load) {
     it(`should load ${resourceName} successfully`, async () => {
       mocks.load!.success()
@@ -91,6 +117,18 @@ export const testResource = ({
       mocks.load!.error()
       await testError(resourceName, 'load', errorStatus, errorPayload)
     })
+
+    if (shouldCache) {
+      it('should cache load action', async () => {
+        mocks.load!.success()
+        await testCache(resourceName, 'LOAD_SUCCESS', Status.success)
+      })
+
+      it('should not cache load action after an error', async () => {
+        mocks.load!.error()
+        await testCache(resourceName, 'LOAD_ERROR', Status.pending)
+      })
+    }
   }
 
   if (mocks.create) {

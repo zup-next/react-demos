@@ -21,5 +21,6 @@ describe('Resource tests: profile', () => {
     },
     loadPayload,
     errorPayload,
+    shouldCache: true,
   })
 })
