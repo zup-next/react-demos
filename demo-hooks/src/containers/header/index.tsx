@@ -11,7 +11,7 @@ const Header: FC = () => {
   const dispatch = useDispatch()
 
   useMemo(() => {
-    dispatch(resources.profile.actions.load()),
+    dispatch(resources.profile.actions.load())
     dispatch(resources.wallet.actions.load())
   }, [])
 
