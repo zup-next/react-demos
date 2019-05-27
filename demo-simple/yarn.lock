@@ -653,6 +653,12 @@
   dependencies:
     regenerator-runtime "^0.13.2"
 
+"@babel/runtime@^7.4.4":
+  version "7.4.5"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.4.5.tgz#582bb531f5f9dc67d2fcb682979894f75e253f12"
+  dependencies:
+    regenerator-runtime "^0.13.2"
+
 "@babel/template@^7.1.0", "@babel/template@^7.4.0", "@babel/template@^7.4.4":
   version "7.4.4"
   resolved "https://registry.yarnpkg.com/@babel/template/-/template-7.4.4.tgz#f4b88d1225689a08f5bc3a17483545be9e4ed237"
@@ -1109,6 +1115,13 @@
 "@xtuc/long@4.2.2":
   version "4.2.2"
   resolved "https://registry.yarnpkg.com/@xtuc/long/-/long-4.2.2.tgz#d291c6a4e97989b5c61d9acf396ae4fe133a718d"
+
+"@zup-next/redux-action-cache@^0.5.1":
+  version "0.5.1"
+  resolved "https://registry.yarnpkg.com/@zup-next/redux-action-cache/-/redux-action-cache-0.5.1.tgz#047793f0cd8a53e0f201705632c5409d8098b7fe"
+  dependencies:
+    "@babel/runtime" "^7.4.4"
+    lodash "^4.17.11"
 
 "@zup-next/redux-resource@^1.0.0":
   version "1.0.0"
