@@ -18,7 +18,7 @@
     "@zup-next/redux-action-cache": "^0.5.1",
     "@zup-next/redux-resource": "^1.0.0",
     "axios": "^0.18.0",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.21",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-hot-loader": "^4.3.12",
